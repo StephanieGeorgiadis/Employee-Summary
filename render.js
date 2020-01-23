@@ -19,7 +19,6 @@ const renderManager = manager => {
     .replace(/{{ id }}/g, manager.getId())
     .replace(/{{ officeNumber }}/g, manager.getofficeNumber())
     teamMembers = teamMembers + managerHTML;
-    console.log(managerHTML);
 };
 
 const renderEnigneer = enigneer => {
@@ -31,7 +30,6 @@ const renderEnigneer = enigneer => {
     .replace(/{{ id }}/g, enigneer.getId())
     .replace(/{{ github }}/g, enigneer.getGithub())
     teamMembers = teamMembers + enigneerHTML;
-    console.log(enigneerHTML);
 };
 
 const renderIntern = intern => {
@@ -43,7 +41,6 @@ const renderIntern = intern => {
     .replace(/{{ id }}/g, intern.getId())
     .replace(/{{ school }}/g, intern.getSchool())
     teamMembers = teamMembers + internHTML;
-    console.log(internHTML);
 };
 
 function createManager(name, id, email, officeNumber) {
