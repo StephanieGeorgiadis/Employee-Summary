@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const templateDir = "./templates/";
-const employeeGen = require("/.lib/emplyee");
+const employeeGen = require("./lib/employee");
 
 const Intern = require("./lib/intern");
 const Engineer = require("./lib/engineer");
@@ -16,7 +16,7 @@ const renderManager = manager => {
     managerHTML = managerHTML + template.replace(/{{ name }}/g, manager.getName())
     .replace(/{{ role }}/g, manager.getRole())
     .replace(/{{ email }}/g, manager.getEmail())
-    .replace(/{{ id }}/g, manager.getID())
+    .replace(/{{ id }}/g, manager.getId())
     .replace(/{{ officeNumber }}/g, manager.getofficeNumber())
     teamMembers = teamMembers + managerHTML;
     console.log(managerHTML);
@@ -28,8 +28,8 @@ const renderEnigneer = enigneer => {
     enigneerHTML = enigneerHTML + template.replace(/{{ name }}/g, enigneer.getName())
     .replace(/{{ role }}/g, enigneer.getRole())
     .replace(/{{ email }}/g, enigneer.getEmail())
-    .replace(/{{ id }}/g, enigneer.getID())
-    .replace(/{{ github }}/g, enigneer.getGitHub())
+    .replace(/{{ id }}/g, enigneer.getId())
+    .replace(/{{ github }}/g, enigneer.getGithub())
     teamMembers = teamMembers + enigneerHTML;
     console.log(enigneerHTML);
 };
@@ -40,7 +40,7 @@ const renderIntern = intern => {
     internHTML = internHTML + template.replace(/{{ name }}/g, intern.getName())
     .replace(/{{ role }}/g, intern.getRole())
     .replace(/{{ email }}/g, intern.getEmail())
-    .replace(/{{ id }}/g, intern.getID())
+    .replace(/{{ id }}/g, intern.getId())
     .replace(/{{ school }}/g, intern.getSchool())
     teamMembers = teamMembers + internHTML;
     console.log(internHTML);
@@ -53,7 +53,7 @@ function createManager(name, id, email, officeNumber) {
 
 function createEngineer(name, id, email, github) {
     const engineer = new Engineer(name, id, email, github)
-    renderEngineer(engineer);
+    renderEnigneer(engineer);
 }
 
 function createIntern(name, id, email, school) {
@@ -65,10 +65,10 @@ function renderMain() {
     let mainTemplate = fs.readFileSync(path.resolve(templateDir, "main.html"), "utf8");
     var mainHTML = "";
     mainHTML = mainHTML + mainTemplate.replace(/{{ team }}/g, teamMembers)
-    let file = path.join(_firname, 'output', "/index.html");
+    let file = path.join('./output', "/index.html");
     console.log(file);
 
-    fs.watchFile(file, mainHTML, function(err) {
+    fs.writeFile(file, mainHTML, function(err) {
         if (err) {
             throw new Error(err)
         }
